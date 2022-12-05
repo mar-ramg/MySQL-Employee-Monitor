@@ -1,8 +1,10 @@
+// dependencies
 const mysql = require('mysql');
 const inquirer = require('inquirer');
 const consoleTable = require('console.table');
 const util = require('util');
 
+// create connection to MySQL
 let connection = mysql.createConnection({
     host: 'localhost',
     port: 3306,
@@ -13,15 +15,18 @@ let connection = mysql.createConnection({
 
 connection.query = util.promisify(connection.query);
 
+// application after establishing the connection
 connection.connect(function (err) {
     if (err) throw err;
     initialAction();
 })
 
+// welcome message for user
 console.table(
     "\n------------ EMPLOYEE TRACKER ------------\n"
 )
 
+// Ask the user initial action question to figure out what they would like to do
 const initialAction = async () => {
     try {
         let answer = await inquirer.prompt({
@@ -78,6 +83,25 @@ const initialAction = async () => {
     };
 }
 
+// view all of the employees
+const employeeView = async () => {
+    console.log('Employee View');
+    try {
+        let query = 'SELECT * FROM employee';
+        connection.query(query, function (err, res) {
+            if (err) throw err;
+            let employeeArray = [];
+            res.forEach(employee => employeeArray.push(employee));
+            console.table(employeeArray);
+            initialAction();
+        });
+    } catch (err) {
+        console.log(err);
+        initialAction();
+    };
+}
+
+// view all of the departments
 const departmentView = async () => {
     console.log('Department View');
     try {
@@ -95,6 +119,7 @@ const departmentView = async () => {
     };
 }
 
+// view all of the roles
 const roleView = async () => {
     console.log('Role View');
     try {
@@ -112,6 +137,7 @@ const roleView = async () => {
     };
 }
 
+// add a new employee
 const employeeAdd = async () => {
     try {
         console.log('Employee Add');
@@ -171,6 +197,7 @@ const employeeAdd = async () => {
     };
 }
 
+// add a new department
 const departmentAdd = async () => {
     try {
         console.log('Department Add');
@@ -196,6 +223,7 @@ const departmentAdd = async () => {
     };
 }
 
+// add a new role
 const roleAdd = async () => {
     try {
         console.log('Role Add');
@@ -246,7 +274,7 @@ const roleAdd = async () => {
         initialAction();
     };
 }
-
+// update a roll for an employee
 const employeeUpdate = async () => {
     try {
         console.log('Employee Update');
@@ -293,7 +321,3 @@ const employeeUpdate = async () => {
         initialAction();
     };
 }
-
-
-
-
