@@ -12,3 +12,8 @@ let connection = mysql.createConnection({
 });
 
 connection.query = util.promisify(connection.query);
+
+connection.connect(function (err) {
+    if (err) throw err;
+    initialAction();
+})
