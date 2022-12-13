@@ -11,10 +11,10 @@ As a business owner I want to be able to view and manage the departments, roles,
 ![schema](https://user-images.githubusercontent.com/110949754/207424381-618ec9d4-a092-4bc2-8343-4cc47dd6203c.png)
 
 # Installation 
-npm i - to install all file in order for npm to work
-npm i inquirer - to use inquirer (to interact with the user via command line)
-npm init - to create a json file
-npm i mysql - to connect to MySql database
-npm console.table - to format tables
+1. npm i - to install all file in order for npm to work
+2. npm i inquirer - to use inquirer (to interact with the user via command line)
+3. npm init - to create a json file
+4. npm i mysql - to connect to MySql database
+5. npm console.table - to format tables
 
 
